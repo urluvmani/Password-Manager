@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Navbar = () => {
   return (
@@ -8,7 +9,7 @@ const Navbar = () => {
         <div className="list flex items-center">
             <Link href={"https://github.com/urluvmani"} target='_blank' >
             <ul className='flex gap-2 bg-green-700 px-2 font-semibold hover:font-bold rounded-md hover:bg-green-600 items-center '>
-            <img src="git.png" alt="" />
+            <Image width={30} height={30} src="/git.png" alt="" />
             GitHub
             </ul>
             </Link>

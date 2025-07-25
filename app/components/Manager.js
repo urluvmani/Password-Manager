@@ -146,7 +146,7 @@ theme: "light",
           onClick={savepass}
           className="bg-green-200 disabled:bg-green-50 border hover:scale-106 hover:text-shadow-current border-green-300 flex items-center gap-2 hover:bg-green-300  font-bold  px-3 py-1 rounded-full"
         >
-          <script src="https://cdn.lordicon.com/lordicon.js"></script>
+         
           <lord-icon
     src="https://cdn.lordicon.com/efxgwrkc.json"
     trigger="hover"
