@@ -4,12 +4,13 @@ import Link from "next/link";
 import { ToastContainer, toast } from 'react-toastify';
 import { v4 as uuidv4 } from "uuid";
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 const Manager = () => {
   const [form, setform] = useState({ link: "", username: "", password: "" });
   const [passwordArray, setpasswordArray] = useState([]);
-  const ref = useRef();
-  const passwordref = useRef();
+  const [show, setShow] = useState(false);
+  const passwordRef = useRef();
 
   useEffect(() => {
     let passwords = localStorage.getItem("passwords");
@@ -17,6 +18,11 @@ const Manager = () => {
       setpasswordArray(JSON.parse(passwords));
     }
   }, []);
+
+
+  const togglePassword = () => {
+    setShow(!show);
+  };
 
   const copytext = (text) => {
     navigator.clipboard.writeText(text);
@@ -32,15 +38,6 @@ theme: "light",
 });
   };
 
-  const hidepass = () => {
-    if (ref.current.src.includes("/eye.png")) {
-      ref.current.src = "/eyecross.png";
-      passwordref.current.type = "password";
-    } else {
-      ref.current.src = "/eye.png";
-      passwordref.current.type = "text";
-    }
-  };
 
   const handleChange = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
@@ -126,21 +123,22 @@ theme: "light",
           />
           <div className="relative">
             <input
-              value={form.password}
-              name="password"
-              onChange={handleChange}
-              ref={passwordref}
-              className="border border-green-500 w-full rounded-full py-1 md:py-0 px-2 bg-white outline-none"
-              placeholder="Enter Password"
-              type="password"
-            />
-            <img
-              ref={ref}
-              onClick={hidepass}
-              className="w-6 hover:cursor-pointer absolute md:right-2 right-3 md:top-[2px] top-[4px] "
-              src="/eyecross.png"
-              alt=""
-            />
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="Enter Password"
+        ref={passwordRef}
+        type={show ? "text" : "password"}
+        className="border border-green-500 py-1 relative  md:py-0 rounded-full px-4 bg-white outline-none "
+      />
+      <Image
+        onClick={togglePassword}
+        src={show ? "/eye.png" : "/eyecross.png"}
+        width={24}
+        height={24}
+        className="absolute right-22 md:right-2 top-2 md:top-[1px] cursor-pointer"
+        alt="Toggle password"
+      />
           </div>
         </div>
         <button
